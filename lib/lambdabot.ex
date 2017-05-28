@@ -8,9 +8,11 @@ defmodule Lambdabot do
   @token Application.fetch_env!(:lambdabot, :token)
 
   def start(_type, _args) do
-    run = Client.start(@token)
-    load_modules()
-    run
+    #run = Client.start(@token)
+    #load_modules()
+    #run
+    IO.puts Application.fetch_env!(:lambdabot, :lambda_timeout)
+    {:ok, spawn(fn -> 2 end)}
   end
 
   def load_modules do
