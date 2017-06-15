@@ -9,7 +9,7 @@ defmodule Lambdabot.Commands.Roles do
 
   @lang_roles Application.fetch_env!(:lambdabot, :lang_roles)
 
-  def format_list([], formatter) do
+  def format_list([], _formatter) do
     ""
   end
   def format_list(l, formatter) do
@@ -20,10 +20,10 @@ defmodule Lambdabot.Commands.Roles do
   Cogs.def role(roles) do
     edit_roles(message, roles, &Client.add_role/3, fn g, f, b ->
       format_list(g,
-        &"I've given you the following roles ```#{&1}```"
+        &"I've given you the following roles: ```#{&1}```"
       ) <>
       format_list(f,
-       &"The following exist, but I couldn't give them to you ```#{&1}```"
+       &"The following exist, but I couldn't give them to you: ```#{&1}```"
       ) <>
       format_list(b,
         &"The following roles don't seem to be valid: ```#{&1}```"
@@ -35,10 +35,10 @@ defmodule Lambdabot.Commands.Roles do
   Cogs.def remrole(roles) do
     edit_roles(message, roles, &Client.remove_role/3, fn g, f, b ->
       format_list(g,
-        &"I've removed the following roles ```#{&1}```"
+        &"I've removed the following roles: ```#{&1}```"
       ) <>
       format_list(f,
-       &"The following exist, but I couldn't give them to you ```#{&1}```"
+       &"The following exist, but I couldn't give them to you: ```#{&1}```"
       ) <>
       format_list(b,
         &"The following roles don't seem to be valid: ```#{&1}```"
